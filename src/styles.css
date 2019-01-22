@@ -2,3 +2,10 @@
 body {
     background-color: lightgray;
 }
+
+.main_container {
+    width: 60%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 10px;
+}

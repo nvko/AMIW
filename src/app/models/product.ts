@@ -1,6 +1,3 @@
 export class Product {
-    id?: number;
-    name: string;
-    price: number;
-    isBought: boolean;
+    constructor(public name: string, public price: number) { }
 }
