@@ -1,28 +1,50 @@
 <div class="main_container">
-  <div class="alert alert-warning" role="alert">
-    Your shopping cart is empty!
+
+  <div *ngIf="isEmpty; else isNotEmpty">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">You don't have any items in your cart.</h1>
+        <p class="lead">Check out our <a href="products">products</a>, we have plenty of equipment for sale.
+          <i class="fa fa-shopping-basket"></i>
+        </p>
+      </div>
+    </div>
   </div>
 
-  <table class="table table-bordered">
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Sample item</td>
-        <td>$12.99</td>
-        <td><a href="" class="btn btn-danger btn-sm">Remove</a></td>
-      </tr>
+  <ng-template #isNotEmpty>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <tr>
-        <th scope="row">2</th>
-        <td>Sample item</td>
-        <td>$42.99</td>
-        <td><a href="" class="btn btn-danger btn-sm">Remove</a></td>
-      </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Sample item</td>
+          <td>$12.99</td>
+          <td>
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </td>
+          <td><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+        </tr>
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+    <button href="" class="btn btn-success">Buy</button>
+  </ng-template>
 
-</div>
-<div class="main_container">
-  <a href="" class="btn btn-success">Buy</a>
 </div>

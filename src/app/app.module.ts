@@ -27,7 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
       { path: '', redirectTo: '/products', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [NavbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
