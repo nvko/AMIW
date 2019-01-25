@@ -1,28 +1,122 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" #navbar>
-    <a class="navbar-brand mb-0 h1" href="">
-        <img src="https://cdn.freebiesupply.com/logos/large/2x/angular-icon-logo-png-transparent.png" width="30" height="30"
-            style="margin-right:5px" class="d-inline-block align-top" alt="">FloorMart</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand mb-0 h1" href="">
+    <img
+      src="https://cdn.freebiesupply.com/logos/large/2x/angular-icon-logo-png-transparent.png"
+      width="30"
+      height="30"
+      style="margin-right:5px"
+      class="d-inline-block align-top"
+      alt="">
+    FloorMart
+  </a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="products">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="history">Purchase history</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="cart">
-                    <i class="fas fa-shopping-cart" ></i> Cart
-                    <span class="badge badge-secondary">{{itemsInCart}}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" href="products">Products</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="history">Purchase history</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href=""
+          data-toggle="modal"
+          data-target="#shoppingCartModal"
+        >
+          <i class="fas fa-shopping-cart"></i> Cart
+          <span [className]="badge">{{ itemsInCart }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
+
+<div
+  class="modal fade"
+  id="shoppingCartModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="shoppingCartModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="shoppingCartModalTitle">
+          Shopping cart <i class="fa fa-shopping-cart"></i>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <span *ngIf="itemsInCart == 0">
+        <div class="modal-body">
+          Your shopping list is empty!
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" [disabled]="true">
+              Buy
+            </button>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="itemsInCart != 0">
+        <div class="modal-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let product of products; let i = index">
+                <td>{{ products[i].name }}</td>
+                <td>${{ products[i].price }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="removeFromCart($event, i)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Sum: ${{ itemsInCartPrice.toFixed(2) }}</h4>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" [disabled]="false">
+              Buy
+            </button>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

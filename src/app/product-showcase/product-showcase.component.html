@@ -5,36 +5,36 @@
       <div class="row" style="margin-bottom:10px;">
         <div class="col-sm-4">
           <div class="card">
-            <img class="card-img-top" src="{{products[i].imgPath}}" alt="Card image cap">
+            <img class="card-img-top" src="{{products[i].img_path}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{products[i].name}}</h5>
               <p class="card-text">Price: ${{products[i].price}}</p>
-              <button class="btn btn-outline-primary" [id]="products[i].id" (click)="click($event)">Add to cart</button>
+              <button class="btn btn-outline-primary" [id]="i" (click)="click($event)">Add to cart</button>
             </div>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <span *ngIf="!last">
+          <span *ngIf="products.length > i+1">
             <div class="card">
-              <img class="card-img-top" src="{{products[i + 1].imgPath}}"  alt="Card image cap">
+              <img class="card-img-top" src="{{products[i + 1].img_path}}"  alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 1].name}}</h5>
                 <p class="card-text">Price: ${{products[i + 1].price}}</p>
-                <button class="btn btn-outline-primary" [id]="products[i].id + 1" (click)="click($event)">Add to cart</button>
+                <button class="btn btn-outline-primary" [id]="i + 1" (click)="click($event)">Add to cart</button>
               </div>
             </div>
           </span>
         </div>
 
         <div class="col-sm-4">
-          <span *ngIf="!last">
+          <span *ngIf="products.length > i+2">
             <div class="card">
-              <img class="card-img-top" src="{{products[i + 2].imgPath}}"  alt="Card image cap">
+              <img class="card-img-top" src="{{products[i + 2].img_path}}"  alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 2].name}}</h5>
                 <p class="card-text">Price: ${{products[i + 2].price}}</p>
-                <button class="btn btn-outline-primary" [id]="products[i].id + 2" (click)="click($event)">Add to cart</button>
+                <button class="btn btn-outline-primary" [id]="i + 2" (click)="click($event)">Add to cart</button>
               </div>
             </div>
           </span>
