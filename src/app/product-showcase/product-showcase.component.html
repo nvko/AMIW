@@ -9,7 +9,7 @@
             <div class="card-body">
               <h5 class="card-title">{{products[i].name}}</h5>
               <p class="card-text">Price: ${{products[i].price}}</p>
-              <button class="btn btn-outline-primary" [id]="i" (click)="click($event)">Add to cart</button>
+              <button class="btn btn-outline-primary" [id]="i" (click)="addProductToCart($event)">Add to cart</button>
             </div>
           </div>
         </div>
@@ -21,7 +21,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 1].name}}</h5>
                 <p class="card-text">Price: ${{products[i + 1].price}}</p>
-                <button class="btn btn-outline-primary" [id]="i + 1" (click)="click($event)">Add to cart</button>
+                <button class="btn btn-outline-primary" [id]="i + 1" (click)="addProductToCart($event)">Add to cart</button>
               </div>
             </div>
           </span>
@@ -34,7 +34,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 2].name}}</h5>
                 <p class="card-text">Price: ${{products[i + 2].price}}</p>
-                <button class="btn btn-outline-primary" [id]="i + 2" (click)="click($event)">Add to cart</button>
+                <button class="btn btn-outline-primary" [id]="i + 2" (click)="addProductToCart($event)">Add to cart</button>
               </div>
             </div>
           </span>

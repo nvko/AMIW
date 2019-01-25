@@ -1,4 +1,4 @@
-import { NavbarService } from './../services/navbar.service';
+import { HttpService } from './../services/http.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Product } from '../models/product';
 
@@ -9,33 +9,42 @@ import { Product } from '../models/product';
 })
 export class NavbarComponent implements OnInit {
 
-  itemsInCart = 0;
+  itemsInCart: number;
   itemsInCartPrice: number = 0;
   products = new Array<Product>();
   badge = 'badge badge-secondary';
 
-  constructor(private navbarService: NavbarService) {
+  constructor(private httpService: HttpService) {
   }
 
-  removeFromCart(event: Event, id: number) {
-    this.itemsInCartPrice -= -this.products[id].price;
-    this.navbarService.removeItemFromCart(id);
+  removeFromCart(event: Event, index: number) {
+    this.itemsInCartPrice -= -this.products[index].price;
+    this.httpService.removeFromCart(this.products[index].id, index).subscribe(data => {
+      this.httpService.getProductsInCart('anon');
+    })
   }
 
   ngOnInit() {
-    this.navbarService.getItemsInCart().subscribe(items => {
-      this.itemsInCart = items.length;
+    this.httpService.getProductsInCart('anon').subscribe(items => {
+      this.itemsInCart = 0;
       this.products = items;
+      for (let i = 0; i < this.products.length; i++) {
+        let quantity: number = + this.products[i].quantity;
+        this.itemsInCart += quantity;
+      }
       if (this.itemsInCart > 0) {
         this.badge = 'badge badge-success';
       } else {
         this.badge = 'badge badge-secondary';
       }
       this.itemsInCartPrice = 0;
-      for (let i = 0; i < this.products.length; i++) {
-        this.itemsInCartPrice += +this.products[i].price;
+      for (let i = 0; i < items.length; i++) {
+        for (let q = 0; q < items[i].quantity; q++) {
+          this.itemsInCartPrice += +items[i].price;
+        }
       }
     });
+
   }
 
 }

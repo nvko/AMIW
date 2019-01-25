@@ -49,7 +49,6 @@
 <div
   class="modal fade"
   id="shoppingCartModal"
-  tabindex="-1"
   role="dialog"
   aria-labelledby="shoppingCartModalTitle"
   aria-hidden="true"
@@ -88,6 +87,7 @@
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -96,13 +96,15 @@
               <tr *ngFor="let product of products; let i = index">
                 <td>{{ products[i].name }}</td>
                 <td>${{ products[i].price }}</td>
+                <td>{{products[i].quantity}}</td>
                 <td>
                   <button
-                    class="btn btn-danger"
-                    (click)="removeFromCart($event, i)"
-                  >
-                    Remove
-                  </button>
+                  class="btn btn-danger"
+                  style="margin-left:10px;"
+                  (click)="removeFromCart($event, i)"
+                >
+                  Remove
+                </button>
                 </td>
               </tr>
             </tbody>

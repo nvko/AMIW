@@ -1,3 +1,4 @@
+import { HttpService } from './../services/http.service';
 import { Product } from './../models/product';
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
@@ -11,13 +12,13 @@ export class ShoppingCartComponent implements OnInit {
 
   isEmpty = true;
 
-  constructor(private navbarService: NavbarService) { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.navbarService.getItemsInCart().subscribe(items => {
-      let itemsInCart = new Array<Product>();
-      itemsInCart = items;
-      if (itemsInCart.length > 0) {
+    this.httpService.getProductsInCart('anon').subscribe(items => {
+      let productsInCart = new Array<Product>();
+      productsInCart = items;
+      if (productsInCart.length > 0) {
         this.isEmpty = false;
       }
     });

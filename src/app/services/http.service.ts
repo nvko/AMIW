@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Product } from './../models/product';
 import { Injectable } from '@angular/core';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 @Injectable({
@@ -10,6 +11,8 @@ import { Injectable } from '@angular/core';
 
 export class HttpService {
 
+  private productsInCart = new Array<Product>();
+  private productsInCartObservable = new Subject<Array<Product>>();
 
   constructor(private http: HttpClient) { }
 
@@ -18,23 +21,31 @@ export class HttpService {
   }
 
   getProductId(id: number): Observable<Product> {
-    return this.http.get<Product>('http://localhost/getProductById.php?id=' + id);
+    const httpParams = new HttpParams().set('id', String(id));
+    return this.http.get<Product>('http://localhost/getProductById.php', { params: httpParams });
   }
 
-  getProductsInCart(username: string): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>('http://localhost/getProductsInCart.php?username=' + username);
+  getProductsInCart(user: string): Observable<Array<Product>> {
+    const httpParams = new HttpParams().set('user', user);
+    this.http.get<Array<Product>>('http://localhost/getProductsInCart.php', { params: httpParams }).subscribe(data => {
+      this.productsInCart = data;
+      this.productsInCartObservable.next(this.productsInCart);
+    });
+    return this.productsInCartObservable;
   }
 
-  getPurchaseHistory(username: string): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>('http://localhost/getPurchaseHistory.php?username=' + username);
+  addProductToCart(product: Product): Observable<Message> {
+    this.productsInCart.push(product);
+    this.productsInCartObservable.next(this.productsInCart);
+    const httpParams = new HttpParams().set('id', String(product.id));
+    return this.http.get<Message>('http://localhost/addProductToCart.php', { params: httpParams });
   }
 
-  addProductToCart(id: number) {
-
-  }
-
-  addBoughtProducts(products: Array<Product>) {
-
+  removeFromCart(id: number, index: number): Observable<Message> {
+    this.productsInCart.slice(index, 1);
+    this.productsInCartObservable.next(this.productsInCart);
+    const httpParams = new HttpParams().set('id', String(id));
+    return this.http.get<Message>('http://localhost/removeProductFromCart.php', { params: httpParams });
   }
 
 
