@@ -6,7 +6,8 @@
       height="30"
       style="margin-right:5px"
       class="d-inline-block align-top"
-      alt="">
+      alt=""
+    />
     FloorMart
   </a>
 
@@ -71,7 +72,9 @@
 
       <span *ngIf="itemsInCart == 0">
         <div class="modal-body">
-          Your shopping list is empty!
+          <div class="alert alert-warning" role="alert">
+            Your shopping list is empty!
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success" [disabled]="true">
               Buy
@@ -96,15 +99,15 @@
               <tr *ngFor="let product of products; let i = index">
                 <td>{{ products[i].name }}</td>
                 <td>${{ products[i].price }}</td>
-                <td>{{products[i].quantity}}</td>
+                <td>{{ products[i].quantity }}</td>
                 <td>
                   <button
-                  class="btn btn-danger"
-                  style="margin-left:10px;"
-                  (click)="removeFromCart($event, i)"
-                >
-                  Remove
-                </button>
+                    class="btn btn-danger"
+                    style="margin-left:10px;"
+                    (click)="removeFromCart($event, i)"
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -113,7 +116,7 @@
           <h4>Sum: ${{ itemsInCartPrice.toFixed(2) }}</h4>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" [disabled]="false">
+            <button type="button" class="btn btn-success" (click)="buyProducts($event)" [disabled]="false">
               Buy
             </button>
           </div>

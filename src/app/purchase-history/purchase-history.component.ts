@@ -1,4 +1,7 @@
+import { HttpService } from './../services/http.service';
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../models/product';
+import { Purchase } from '../models/purchase';
 
 @Component({
   selector: 'app-purchase-history',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  constructor() { }
+  purchases = new Array<Purchase>();
+
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.httpService.getPurchaseHistory().subscribe(data => {
+      this.purchases = data;
+    });
   }
 
 }

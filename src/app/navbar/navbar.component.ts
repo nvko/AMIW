@@ -1,6 +1,7 @@
 import { HttpService } from './../services/http.service';
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ export class NavbarComponent implements OnInit {
   itemsInCartPrice: number = 0;
   products = new Array<Product>();
   badge = 'badge badge-secondary';
+  message: Message;
 
   constructor(private httpService: HttpService) {
   }
@@ -20,12 +22,19 @@ export class NavbarComponent implements OnInit {
   removeFromCart(event: Event, index: number) {
     this.itemsInCartPrice -= -this.products[index].price;
     this.httpService.removeFromCart(this.products[index].id, index).subscribe(data => {
-      this.httpService.getProductsInCart('anon');
+      this.httpService.getProductsInCart();
     })
   }
 
+  buyProducts(event: Event) {
+    // this.httpService.buyProducts(this.products).subscribe(data => {
+
+    // });
+    // this.products = new Array();
+  }
+
   ngOnInit() {
-    this.httpService.getProductsInCart('anon').subscribe(items => {
+    this.httpService.getProductsInCart().subscribe(items => {
       this.itemsInCart = 0;
       this.products = items;
       for (let i = 0; i < this.products.length; i++) {

@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { HttpService } from './../services/http.service';
 import { Component, OnInit, Input, Inject, Output } from '@angular/core';
 import { Product } from '../models/product';
@@ -21,7 +20,7 @@ export class ProductShowcaseComponent implements OnInit {
     let index = Number(elementId);
     if (index < this.products.length) {
       this.httpService.addProductToCart(this.products[index]).subscribe(data => {
-        this.httpService.getProductsInCart('anon');
+        this.httpService.getProductsInCart();
       });
     }
   }
