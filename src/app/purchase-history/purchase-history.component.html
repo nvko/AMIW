@@ -1,13 +1,43 @@
 <div class="main_container">
+  <span *ngIf="products.length != 0; else empty">
+    <span *ngFor="let transaction of transactions; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title" style="color: darkgreen;">
+            Purchase date: {{ transactions[i][0].purchase_date }},<br/> ID:
+            {{ transactions[i][0].transaction_token }}
+          </h6>
+          <table
+            class="table table-bordered table-striped table-sm"
+            style="width:80%; margin: 0 auto;"
+          >
+            <tbody>
+              <tr *ngFor="let product of transactions[i]; let j = index">
+                <td style="width:60%;">{{ product.name }}</td>
+                <td style="width:20%;">{{ product.quantity }}</td>
+                <td style="width:20%;">
+                  ${{ getOverallProductPrice(product.price, product.quantity) }}
+                </td>
+              </tr>
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Date: 13.03.2018 20:18:00</h5>
-      <p class="card-text">
-        Mountain Dew<br/>
-        Samsung Smart TV
-      </p>
+              <tr>
+                <td><b>SUM:</b></td>
+                <td>
+                  <b>{{ getOveralQuantity(i) }}</b>
+                </td>
+                <td>
+                  <b>${{ getOverallPrice(i) }}</b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </span>
+  </span>
+  <ng-template #empty>
+    <div class="alert alert-warning" role="alert">
+      You have not bought anything yet!
     </div>
-  </div>
-
+  </ng-template>
 </div>

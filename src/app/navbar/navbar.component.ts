@@ -2,6 +2,8 @@ import { HttpService } from './../services/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Router } from '@angular/router';
+import { ProductShowcaseComponent } from '../product-showcase/product-showcase.component';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +18,7 @@ export class NavbarComponent implements OnInit {
   badge = 'badge badge-secondary';
   message: Message;
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private router: Router) {
   }
 
   removeFromCart(event: Event, index: number) {
@@ -27,10 +29,8 @@ export class NavbarComponent implements OnInit {
   }
 
   buyProducts(event: Event) {
-    // this.httpService.buyProducts(this.products).subscribe(data => {
-
-    // });
-    // this.products = new Array();
+    this.httpService.buyProducts(this.products).subscribe();
+    this.products = new Array();
   }
 
   ngOnInit() {

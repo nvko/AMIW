@@ -3,7 +3,6 @@ import { Observable, Subject } from 'rxjs';
 import { Product } from './../models/product';
 import { Injectable } from '@angular/core';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Purchase } from '../models/purchase';
 
 
 @Injectable({
@@ -57,8 +56,9 @@ export class HttpService {
     return this.http.get<Message>('http://localhost/buyProducts.php', { params: httpParams });
   }
 
-  getPurchaseHistory(): Observable<Array<Purchase>> {
+  getPurchaseHistory(): Observable<Array<Product>> {
     const httpParams = new HttpParams().set('user', 'anon');
-    return this.http.get<Array<Purchase>>('http://localhost/getPurchaseHistory.php');
+    return this.http.get<Array<Product>>('http://localhost/getPurchaseHistory.php', { params: httpParams });
   }
+
 }
