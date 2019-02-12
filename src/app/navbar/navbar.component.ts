@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   removeFromCart(event: Event, index: number) {
     this.itemsInCartPrice -= -this.products[index].price;
     this.httpService.removeFromCart(this.products[index].id, index).subscribe(data => {
-      this.httpService.getProductsInCart();
+      this.httpService.getProductsInCart('anon');
     })
   }
 
@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpService.getProductsInCart().subscribe(items => {
+    this.httpService.getProductsInCart('anon').subscribe(items => {
       this.itemsInCart = 0;
       this.products = items;
       for (let i = 0; i < this.products.length; i++) {

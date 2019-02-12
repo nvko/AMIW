@@ -21,11 +21,10 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpService.getPurchaseHistory().subscribe(data => {
-
+    this.httpService.getPurchaseHistory('anon').subscribe(data => {
       let token = data[0].transaction_token;
       for (let i = 0; i < data.length; i++) {
-        if (data[i].transaction_token == token) {
+        if (data[i].transaction_token === token) {
           this.products.push(data[i]);
         } else {
           this.transactions.push(this.products);
@@ -34,7 +33,7 @@ export class PurchaseHistoryComponent implements OnInit {
           token = data[i].transaction_token;
         }
 
-        if (i == data.length - 1) {
+        if (i === data.length - 1) {
           this.transactions.push(this.products);
         }
       }

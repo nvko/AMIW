@@ -20,7 +20,7 @@ export class ProductShowcaseComponent implements OnInit {
     let index = Number(elementId);
     if (index < this.products.length) {
       this.httpService.addProductToCart(this.products[index]).subscribe(data => {
-        this.httpService.getProductsInCart();
+        this.httpService.getProductsInCart('anon');
       });
     }
   }
