@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
 
   buyProducts(event: Event) {
     this.httpService.buyProducts(this.products).subscribe(data => {
-      this.httpService.getProductsInCart('anon');
+      this.httpService.getProductsInCart('anon').subscribe();
       this.products = new Array();
     });
   }

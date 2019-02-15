@@ -12,7 +12,7 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 export class HttpService {
 
   // change the URL to your own domain
-  private url = 'http://localhost/REST/';
+  private url = 'http://localhost/REST';
 
   private productsInCart = new Array<Product>();
   private productsInCartObservable = new Subject<Array<Product>>();
@@ -21,17 +21,18 @@ export class HttpService {
     this.productsInCart = new Array<Product>();
   }
 
+  // PRODUCTS
   getProducts(): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>(this.url + 'products/');
+    return this.http.get<Array<Product>>(this.url + '/products/');
   }
 
   getProductId(id: number): Observable<Product> {
-    const httpParams = new HttpParams().set('id', String(id));
-    return this.http.get<Product>('http://localhost/getProductById.php', { params: httpParams });
+    return this.http.get<Product>(this.url + '/products/' + id);
   }
 
+  // CART
   getProductsInCart(user: string): Observable<Array<Product>> {
-    this.http.get<Array<Product>>(this.url + 'cart/' + user).subscribe(data => {
+    this.http.get<Array<Product>>(this.url + '/cart/' + user).subscribe(data => {
       this.productsInCart = data;
       this.productsInCartObservable.next(this.productsInCart);
     });
@@ -39,26 +40,27 @@ export class HttpService {
   }
 
   addProductToCart(product: Product): Observable<Message> {
-    return this.http.post<Message>('http://localhost/REST/cart/add', {
+    return this.http.post<Message>(this.url + '/cart/add', {
       user: 'anon',
-      product_id: String(product.id)
+      product_id: String(product.id),
     });
   }
 
+  //TODO: add parameters
   removeFromCart(product: Product, index: number): Observable<Message> {
-    let options;
-    return this.http.delete<Message>('http://localhost/REST/cart/delete');
+    return this.http.delete<Message>(this.url + '/cart/delete');
   }
 
 
+  // HISTORY
   buyProducts(products: Array<Product>): Observable<Message> {
-    return this.http.post<Message>('http://localhost/REST/cart/buy', {
+    return this.http.post<Message>(this.url + '/cart/buy', {
       user: 'anon'
     });
   }
 
   getPurchaseHistory(user: string): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>('http://localhost/REST/history/' + user);
+    return this.http.get<Array<Product>>(this.url + '/history/' + user);
   }
 
 }

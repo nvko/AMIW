@@ -17,7 +17,6 @@ export class PurchaseHistoryComponent implements OnInit {
 
   getFilterToken(token: string) {
     this.productsFiltered = this.products.filter(x => x.transaction_token = token);
-    console.log(this.productsFiltered.length);
   }
 
   ngOnInit() {
