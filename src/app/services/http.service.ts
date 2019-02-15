@@ -46,9 +46,8 @@ export class HttpService {
     });
   }
 
-  //TODO: add parameters
-  removeFromCart(product: Product, index: number): Observable<Message> {
-    return this.http.delete<Message>(this.url + '/cart/delete');
+  removeFromCart(user: string, product: Product): Observable<Message> {
+    return this.http.delete<Message>(this.url + '/cart/delete/' + user + '/' + product.id);
   }
 
 

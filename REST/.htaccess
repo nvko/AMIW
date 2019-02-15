@@ -1,17 +1,17 @@
 RewriteEngine on
 # all products
-RewriteRule ^products\/?$ api/products/read.php [NC] 
+RewriteRule ^products\/?$ api/products/read.php [NC]
 # product by id
 RewriteRule ^products/([0-9]+)$ api/products/read.php?id=$1 [NC]
-# get purchase history 
-RewriteRule ^history/([0-9a-zA-Z]+)$ api/history/read.php?user=$1 
-# add new purchase to history 
+# get purchase history
+RewriteRule ^history/([0-9a-zA-Z]+)$ api/history/read.php?user=$1
+# add new purchase to history
 RewriteRule ^cart/buy\/?$ api/history/create.php
 # add product to cart
 RewriteRule ^cart/add$ api/cart/create.php
-# products in cart 
+# products in cart
 RewriteRule ^cart/([0-9a-zA-Z]+)$ api/cart/read.php?user=$1 [NC]
 # remove product from cart
-RewriteRule ^cart/delete\/?$ api/cart/delete.php
+RewriteRule ^cart/delete/([0-9a-zA-Z]+)/([0-9]+)$  api/cart/delete.php?user=$1&product_id=$2
 # update product in cart
 RewriteRule ^cart/update\/?$ api/cart/update.php

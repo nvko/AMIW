@@ -13,11 +13,10 @@ $db = $database->connect();
 $cart = new Cart($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    // getting data from sent json string
-    $data_json = json_decode(file_get_contents("php://input"), true);
     // setting cart variables
-    $cart->user = $data_json['user'];
-    $cart->product_id = $data_json['product_id'];
+    $cart->user = $_GET['user'];
+    $cart->product_id = $_GET['product_id'];
+
     if ($cart->ifProductExistsInCart()) {
         if ($cart->delete()) {
             echo json_encode(
