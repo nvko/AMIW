@@ -28,5 +28,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Screenshots
 
-![Main page](https://github.com/nvko/FloorMart/tree/master/screenshots/main.png)
-![Purchase history](https://github.com/nvko/FloorMart/tree/master/screenshots/history.png)
+![Main page](https://github.com/nvko/FloorMart/blob/master/screenshots/main.png)
+
+![Purchase history](https://github.com/nvko/FloorMart/blob/master/screenshots/history.png)
