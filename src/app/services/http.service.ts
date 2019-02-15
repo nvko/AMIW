@@ -17,7 +17,9 @@ export class HttpService {
   private productsInCart = new Array<Product>();
   private productsInCartObservable = new Subject<Array<Product>>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.productsInCart = new Array<Product>();
+  }
 
   getProducts(): Observable<Array<Product>> {
     return this.http.get<Array<Product>>(this.url + 'products/');
@@ -37,27 +39,22 @@ export class HttpService {
   }
 
   addProductToCart(product: Product): Observable<Message> {
-    this.productsInCart.push(product);
-    this.productsInCartObservable.next(this.productsInCart);
     return this.http.post<Message>('http://localhost/REST/cart/add', {
       user: 'anon',
-      product_id: String(product.id),
+      product_id: String(product.id)
     });
   }
 
-  removeFromCart(id: number, index: number): Observable<Message> {
-    this.productsInCart.slice(index, 1);
-    this.productsInCartObservable.next(this.productsInCart);
-    const httpParams = new HttpParams().set('id', String(id)).set('name', 'anon');
-    return this.http.get<Message>('http://localhost/removeProductFromCart.php', { params: httpParams });
+  removeFromCart(product: Product, index: number): Observable<Message> {
+    let options;
+    return this.http.delete<Message>('http://localhost/REST/cart/delete');
   }
 
 
   buyProducts(products: Array<Product>): Observable<Message> {
-    this.productsInCart = new Array();
-    this.productsInCartObservable.next(this.productsInCart);
-    const httpParams = new HttpParams().set('user', 'anon');
-    return this.http.get<Message>('http://localhost/buyProducts.php', { params: httpParams });
+    return this.http.post<Message>('http://localhost/REST/cart/buy', {
+      user: 'anon'
+    });
   }
 
   getPurchaseHistory(user: string): Observable<Array<Product>> {

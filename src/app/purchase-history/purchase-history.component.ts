@@ -45,7 +45,7 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   getOverallPrice(index: number) {
-    let price = 0
+    let price = 0;
     for (let i = 0; i < this.transactions[index].length; i++) {
       price += +this.transactions[index][i].price * this.transactions[index][i].quantity;
     }

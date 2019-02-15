@@ -17,12 +17,10 @@ export class ProductShowcaseComponent implements OnInit {
 
   addProductToCart(event: Event): void {
     const elementId: string = (event.target as Element).id;
-    let index = Number(elementId);
-    if (index < this.products.length) {
-      this.httpService.addProductToCart(this.products[index]).subscribe(data => {
-        this.httpService.getProductsInCart('anon');
-      });
-    }
+    const index = Number(elementId);
+    this.httpService.addProductToCart(this.products[index]).subscribe(data => {
+      this.httpService.getProductsInCart('anon');
+    });
   }
 
   ngOnInit() {
