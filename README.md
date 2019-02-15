@@ -25,3 +25,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 4. product showcase pagination
 5. product categories
 6. admin panel (adding/removing items, changing price, adding a promotion)
+
+## Screenshots
+
+![Main page](https://github.com/nvko/FloorMart/tree/master/screenshots/main.png)
+![Purchase history](https://github.com/nvko/FloorMart/tree/master/screenshots/history.png)
