@@ -98,7 +98,7 @@
 
       <span *ngIf="itemsInCart != 0">
         <div class="modal-body">
-          <table class="table table-bordered">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Name</th>
@@ -115,11 +115,10 @@
                 <td>{{ products[i].quantity }}</td>
                 <td>
                   <button
-                    class="btn btn-danger"
-                    style="margin-left:10px;"
+                    class="btn btn-outline-danger btn-remove-product"
                     (click)="removeFromCart($event, i)"
                   >
-                    Remove
+                    <i class="material-icons">remove_circle</i>
                   </button>
                 </td>
               </tr>

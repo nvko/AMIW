@@ -1,0 +1,13 @@
+.btn-remove-product {
+  outline: none !important;
+  box-shadow: none  !important;
+  border:none  !important;
+}
+
+.btn-remove-product:focus, .btn-remove-product:hover, .btn-remove-product:visited, .btn-remove-product:active {
+  background: transparent !important;
+  color: rgb(85, 0, 0) !important;
+  outline: none !important;
+  box-shadow: none  !important;
+  border:none  !important;
+}

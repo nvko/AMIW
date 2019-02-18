@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
       }
 
       if (this.itemsInCart > 0) {
-        this.badge = 'badge badge-success';
+        this.badge = 'badge badge-primary';
       } else {
         this.badge = 'badge badge-secondary';
       }

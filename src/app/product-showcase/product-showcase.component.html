@@ -8,7 +8,7 @@
             <img class="card-img-top" src="{{products[i].img_path}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{products[i].name}}</h5>
-              <p class="card-text">Price: ${{products[i].price}}</p>
+              <p class="card-text">Price: {{products[i].price | currency:'USD'}}</p>
               <button class="btn btn-outline-primary" [id]="i" (click)="addProductToCart($event)">Add to cart</button>
             </div>
           </div>
@@ -20,7 +20,7 @@
               <img class="card-img-top" src="{{products[i + 1].img_path}}"  alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 1].name}}</h5>
-                <p class="card-text">Price: ${{products[i + 1].price}}</p>
+                <p class="card-text">Price: {{products[i + 1].price | currency:'USD'}}</p>
                 <button class="btn btn-outline-primary" [id]="i + 1" (click)="addProductToCart($event)">Add to cart</button>
               </div>
             </div>
@@ -33,7 +33,7 @@
               <img class="card-img-top" src="{{products[i + 2].img_path}}"  alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{products[i + 2].name}}</h5>
-                <p class="card-text">Price: ${{products[i + 2].price}}</p>
+                <p class="card-text">Price: {{products[i + 2].price | currency:'USD'}}</p>
                 <button class="btn btn-outline-primary" [id]="i + 2" (click)="addProductToCart($event)">Add to cart</button>
               </div>
             </div>
